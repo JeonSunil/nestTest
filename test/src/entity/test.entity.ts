@@ -21,10 +21,10 @@ export class TestEntity {
   @PrimaryGeneratedColumn()
   id:  number
 
-  @Column()
+  @Column({nullable: true})
   user_id: string;
   
-  @Column()
+  @Column({nullable: true})
   pw: string;
 
   @Column({ type: 'timestamp' })

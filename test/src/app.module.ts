@@ -2,10 +2,12 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { TestEntity } from './test.entity';
+import { TestEntity } from './entity/test.entity';
 import { TestController } from './test/test.controller';
 import { TestService } from './test/test.service';
-import { TestModule } from './test/test.modules';
+import { TestModule } from './test/test.module';
+import { AddModule } from './add/add.module';
+import { WeeklyEntity } from './entity/weekly.entity';
 
 @Module({
   imports: [
@@ -15,10 +17,21 @@ import { TestModule } from './test/test.modules';
       port: 5432,
       username: 'jeonsunil',
       database: 'test',
-      entities: [TestEntity],
-      synchronize: false,
+      entities: [TestEntity, WeeklyEntity],
+      synchronize: true,
     }),
+    // TypeOrmModule.forRoot({
+    //   type: 'postgres',
+    //   host: 'localhost',
+    //   port: 5432,
+    //   username: 'jeonsunil',
+    //   database: 'test',
+    //   entities: [WeeklyEntity],
+    //   synchronize: true,
+    // }),
+    // TypeOrmModule.forFeature([WeeklyEntity]),
     TestModule,
+    AddModule,
   ],
   controllers: [AppController,],
   providers: [AppService,],
